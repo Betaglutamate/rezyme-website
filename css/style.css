@@ -273,10 +273,11 @@ strong {
 }
 
 #technology .tech-item {
-    background: #F8F9FA;       /* Very light grey background for each item */
+    background: #EAEAEA;       /* Very light grey background for each item */
     padding: 25px;
     border-radius: 6px;
-    border: 1px solid #DEE2E6; /* Light grey border for items */
+    border: 2px solid #3FAAA9; /* Light grey border for items */
+
 }
 
 #technology .tech-item img {
@@ -303,7 +304,7 @@ strong {
 #technology .tech-synergy {
     background: transparent; /* Or #F8F9FA for a slightly boxed look */
     padding: 30px 0;
-    border-top: 1px dashed var(--accent-color-main); /* Teal dashed line */
+    border-top: 1.5px dashed var(--accent-color-main); /* Teal dashed line */
     margin-top: 40px;
     text-align: left;
 }
