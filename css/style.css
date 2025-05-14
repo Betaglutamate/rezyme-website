@@ -1,0 +1,542 @@
+/* Global Reset & Base Styles */
+:root {
+    --primary-bg: #1A1A1A; /* Dark grey, slightly off-black */
+    --text-color-light: #EAEAEA; /* Off-white for text on dark bg */
+    --text-color-dark: #212529; /* For text on light bg (if any) */
+    --accent-color-main: #4FB9B9; /* Main Teal Accent (adjust based on exact shade) */
+    --accent-color-darker: #3FAAA9; /* Darker Teal for hover/borders */
+    --content-bg-light: #FFFFFF; /* For sections with a light background (like contact potentially) */
+    --header-height: 65px;
+    --font-family-main: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Example font stack */
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height);
+}
+
+body {
+    font-family: var(--font-family-main);
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color-light);
+    background-color: var(--primary-bg);
+    font-size: 16px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px; /* Slightly wider for a more spacious feel like slides */
+    margin: auto;
+    padding: 0 20px;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 600; /* Slightly bolder for strong headings */
+    line-height: 1.3;
+    color: var(--text-color-light); /* Default to light text */
+}
+
+h1 { font-size: 2.8rem; color: var(--accent-color-main); } /* Teal for main H1 */
+h2 { font-size: 2.2rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent-color-darker); padding-bottom: 0.5rem; display: inline-block;} /* Teal underline for H2 */
+h3 { font-size: 1.6rem; color: var(--accent-color-main); } /* Teal for H3 */
+h4 { font-size: 1.2rem; font-weight: 500;}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    font-size: 1rem; /* 16px */
+}
+
+a {
+    color: var(--accent-color-main);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: var(--accent-color-darker);
+    text-decoration: underline;
+}
+
+strong { /* For emphasis like in the deck */
+    font-weight: 600;
+    color: var(--accent-color-main);
+}
+
+/* Header & Navigation */
+#main-header {
+    background: rgba(26, 26, 26, 0.9); /* Slightly transparent dark background */
+    backdrop-filter: blur(5px); /* Frosted glass effect for header */
+    height: var(--header-height);
+    border-bottom: 1px solid var(--accent-color-darker);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+#main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#main-header .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-color-light);
+    text-decoration: none;
+    letter-spacing: 1px; /* Add some letter spacing if logo is text */
+}
+#main-header .logo:hover {
+    text-decoration: none;
+    color: var(--accent-color-main);
+}
+
+#main-header nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+#main-header nav ul li {
+    margin-left: 25px;
+}
+
+#main-header nav ul li a {
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 5px 0;
+    font-weight: 500;
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+#main-header nav ul li a:hover,
+#main-header nav ul li a.active {
+    color: var(--accent-color-main);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent-color-main);
+}
+
+/* Section Base Styling */
+.content-section {
+    padding: 80px 0;
+    text-align: left;
+    border-bottom: 1px solid rgba(var(--accent-color-main-rgb, 79, 185, 185), 0.2); /* Subtle separator using RGB version of accent */
+}
+.content-section:last-of-type {
+    border-bottom: none;
+}
+
+.section-intro {
+    font-size: 1.15rem;
+    color: #BDBDBD; /* Lighter grey for intros */
+    max-width: 750px;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+/* Hero Section */
+/* In your style.css */
+
+/* ... (your existing :root and other base styles) ... */
+
+.hero-section {
+    position: relative; /* Crucial for positioning child elements like the video and overlay */
+    background-color: var(--primary-bg); /* Fallback if video doesn't load */
+    color: var(--text-color-light);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Or 'center' if you prefer centered text block */
+    padding-top: var(--header-height);
+    box-sizing: border-box;
+    text-align: left; /* Or 'center' */
+    overflow: hidden; /* Prevents video from spilling out if aspect ratios differ significantly */
+    border-bottom: 1px solid rgba(var(--accent-color-main-rgb), 0.2);
+}
+
+.hero-background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Video layer */
+}
+
+.hero-background-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the entire area, cropping if necessary */
+}
+
+/* Dark overlay for better text readability over the video */
+.hero-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 26, 26, 0.6); /* Dark overlay (adjust #1A1A1A's RGB and opacity (0.0 to 1.0)) */
+    z-index: 2; /* Overlay layer - above video, below text */
+}
+
+.hero-section .container {
+    position: relative; /* Ensure text container is on top of video and overlay */
+    z-index: 3;       /* Text content layer */
+    max-width: 800px; /* Or your preferred width */
+}
+
+/* Ensure your H1 and P styles are targeting the hero section specifically if needed */
+.hero-section h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--text-color-light); /* Ensure it's light for dark bg/overlay */
+    line-height: 1.2;
+}
+
+.hero-section h1 .accent-text { /* For making "Enzyme Revolution" teal */
+    color: var(--accent-color-main);
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 35px;
+    color: #E0E0E0; /* Slightly brighter than default text for better readability */
+}
+
+/* CTA Button - re-enabled and styled */
+.hero-section .cta-button {
+    display: inline-block;
+    background: var(--accent-color-main);
+    color: var(--primary-bg); /* Dark text on accent button for contrast */
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    border: 2px solid var(--accent-color-main);
+    box-shadow: 0 4px 15px rgba(var(--accent-color-main-rgb), 0.2); /* Subtle glow */
+}
+
+.hero-section .cta-button:hover {
+    background: var(--accent-color-darker);
+    border-color: var(--accent-color-darker);
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+/* Technology Section */
+#technology {
+    /* background-color: #222222; Slightly different dark if needed */
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 35px;
+    margin-bottom: 40px;
+}
+
+.tech-item {
+    background: rgba(255, 255, 255, 0.03); /* Very subtle background for items */
+    padding: 25px;
+    border-radius: 6px;
+    border: 1px solid rgba(var(--accent-color-main-rgb, 79, 185, 185), 0.3); /* Accent border */
+}
+
+.tech-item img {
+    display: block; /* Show images again */
+    width: 60px; /* Adjust size as needed */
+    height: 60px;
+    margin-bottom: 20px;
+    /* For SVG icons, you might want to control fill color via CSS if they are inline or loaded via <object> */
+    /* filter: invert(1) sepia(1) saturate(5) hue-rotate(130deg); /* Example to colorize placeholder to teal */
+}
+
+.tech-item h3 {
+    font-size: 1.4rem;
+    color: var(--accent-color-main); /* Teal H3 for tech items */
+    margin-bottom: 10px;
+}
+.tech-item p {
+    font-size: 0.95rem;
+    color: #BDBDBD;
+}
+
+.tech-synergy {
+    background: transparent; /* No distinct background, blend with section */
+    padding: 30px 0; /* Padding top/bottom */
+    border-top: 1px dashed rgba(var(--accent-color-main-rgb, 79, 185, 185), 0.4);
+    margin-top: 40px;
+    text-align: left;
+}
+.tech-synergy h3 {
+    color: var(--text-color-light); /* White heading for synergy */
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+.tech-synergy p {
+    font-size: 1rem;
+    color: #CFCFCF;
+}
+
+/* Team Section */
+#team .section-intro {
+    margin-bottom: 50px; /* More space before team grid */
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.team-member {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid rgba(var(--accent-color-main-rgb, 79, 185, 185), 0.2);
+}
+
+.team-member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--accent-color-main); /* Teal border for team photos */
+}
+
+.team-member h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--text-color-light);
+}
+
+.team-member p {
+    font-size: 0.95rem;
+    color: #BDBDBD;
+    margin-bottom: 3px;
+}
+.team-member p em {
+    color: var(--accent-color-main); /* Expertise in teal */
+    font-style: normal;
+    font-weight: 500;
+}
+.team-outro {
+    font-size: 1.05rem;
+    max-width: 750px;
+    margin-top: 40px;
+    color: #CFCFCF;
+    text-align: center; /* Center the outro text */
+    padding: 20px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 4px;
+}
+
+/* Assuming these color variables are defined in your main CSS:
+:root {
+    --text-color-light: #EAEAEA;
+    --accent-color-main: #4FB9B9;
+    --accent-color-darker: #3FAAA9; 
+    --primary-bg: #1A1A1A;
+}
+*/
+
+.team-member h4 { /* Container for the name and LinkedIn link */
+    font-size: 1.2rem; /* Adjust as per your main H4 style */
+    color: var(--text-color-light); /* Text color for the name */
+    display: flex; /* Aligns name and LinkedIn link on the same line */
+    align-items: center; /* Vertically aligns the name and the link box */
+    margin-bottom: 8px; /* Or your preferred margin */
+    font-weight: 500; /* Or your preferred font-weight */
+}
+
+/* Ensure these variables from your main CSS are available for context:
+:root {
+    --text-color-light: #EAEAEA;
+    --accent-color-main: #4FB9B9; 
+    --accent-color-main-rgb: 79, 185, 185;
+}
+*/
+
+.team-member h4 span { /* The team member's name */
+    margin-right: 8px; /* Space between the name and the LinkedIn box */
+    line-height: 1.2;  /* Adjust if text alignment within span is off */
+}
+
+.linkedin-link { /* This is the clickable square box */
+    display: inline-flex;    /* Allows it to sit inline and use flex properties */
+    justify-content: center; /* Centers the SVG horizontally within the box */
+    align-items: center;     /* Centers the SVG vertically within the box */
+    width: 30px;             /* Makes the box square - adjust size as needed */
+    height: 30px;            /* Makes the box square - adjust size as needed */
+    border: 1px solid rgba(var(--accent-color-main-rgb), 0.4); /* Subtle border */
+    border-radius: 3px;      /* Slightly rounded corners for the box */
+    text-decoration: none;
+    flex-shrink: 0;          /* Prevents the box from shrinking if name is long */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.linkedin-link:hover,
+.linkedin-link:focus {
+    background-color: rgba(var(--accent-color-main-rgb), 0.15);
+    border-color: var(--accent-color-main);
+}
+
+
+/* More Specific - try this */
+.team-member h4 a.linkedin-link img.linkedin-logo-img {
+    width: 30px;             /* Makes the box square - adjust size as needed */
+    height: 30px;            /* Makes the box square - adjust size as needed */
+    min-width: 20px;
+    min-height: 20px;
+    display: block;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    border: none;
+    margin-bottom: 0;
+}
+
+
+.linkedin-link:hover .linkedin-logo-img,
+.linkedin-link:focus .linkedin-logo-img {
+    opacity: 1;
+}
+
+/* Contact Section */
+#contact {
+    /* background-color: var(--accent-color-main); /* Option for a full teal background section */
+    /* color: var(--primary-bg); */
+    text-align: center;
+    padding-bottom: 100px; /* More padding for last section */
+}
+#contact h2 {
+     /* color: var(--primary-bg); */ /* Dark text if on teal bg */
+     border-bottom-color: var(--accent-color-main); /* Ensure H2 underline uses the desired color */
+}
+#contact p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    /* color: #2c7a7a; /* Darker teal text if on light/teal bg */
+}
+.contact-email {
+    font-size: 1.3rem !important;
+    font-weight: 600;
+}
+.contact-email a {
+    color: var(--accent-color-main); /* Teal email link */
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.contact-email a:hover {
+    color: var(--text-color-light); /* Light text on hover */
+    background-color: var(--accent-color-darker);
+    text-decoration: none;
+    border-color: var(--accent-color-darker);
+}
+
+/* Footer */
+footer {
+    background: #111111; /* Even darker footer */
+    color: #888888;
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid #333333;
+}
+
+footer p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+/* RGB variable for rgba usage - define this if not already defined or handle directly */
+:root {
+    --accent-color-main-rgb: 79, 185, 185; /* Corresponds to #4FB9B9 */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 60px;
+    }
+
+    body { font-size: 15px; }
+    h1 { font-size: 2.2rem; } /* Hero H1 */
+    .hero-section h1 { font-size: 2.5rem; } /* Ensure hero H1 is still prominent */
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.4rem; }
+
+    #main-header {
+        /* Basic mobile nav: links might wrap or you might want a hamburger menu */
+    }
+    #main-header .logo {
+        font-size: 1.6rem;
+    }
+    #main-header nav {
+        /* display: none; /* Example: Hide nav for a hamburger menu approach */
+    }
+     #main-header nav ul {
+        /* flex-direction: column; position: absolute; etc. for hamburger */
+    }
+    #main-header nav ul li {
+        margin-left: 15px;
+    }
+     #main-header nav ul li a {
+        font-size: 0.9rem;
+    }
+
+    .hero-section {
+        padding-top: var(--header-height);
+        text-align: center; /* Center hero content on mobile */
+    }
+    .hero-section .container {
+        justify-content: center;
+    }
+     .hero-section h1 {
+        font-size: 2.4rem;
+    }
+    .hero-section p {
+        font-size: 1.1rem;
+    }
+
+    .content-section {
+        padding: 60px 0;
+    }
+    .content-section h2 {
+        display: block; /* Make H2 full width for mobile */
+        text-align: center;
+        border-bottom-width: 2px; /* Ensure border is visible */
+    }
+
+    .tech-grid, .team-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .tech-item, .team-member {
+        padding: 20px;
+    }
+
+}
+
